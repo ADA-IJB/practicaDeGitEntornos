@@ -35,7 +35,7 @@ public class EjercicioBiblioteca {
 		do {
 			System.out.println("Introduce ISBN (o 'x' para salir):");
 			isbn = teclado.nextLine();
-		} while (!biblio.existeLibro(isbn) && !isbn.equalsIgnoreCase("x"));
+		} while (!(biblio.buscarPorISBN(isbn) != null) && !isbn.equalsIgnoreCase("x"));
 		return isbn;
 	}
 
@@ -59,19 +59,7 @@ public class EjercicioBiblioteca {
 					System.out.println("BIBLIOTECA NO CREADA");
 					break;
 				}
-				String isbn, titulo, autor;
-				do {
-					System.out.println("Introduce ISBN:");
-					isbn = teclado.nextLine();
-					if (miBiblio.existeLibro(isbn))
-						System.out.println("ISBN duplicado.");
-				} while (miBiblio.existeLibro(isbn));
-				System.out.println("Introduce título:");
-				titulo = teclado.nextLine();
-				System.out.println("Introduce autor:");
-				autor = teclado.nextLine();
-				if (miBiblio.agregarLibro(isbn, titulo, autor))
-					System.out.println("Libro agregado correctamente.");
+				registrarLibro(miBiblio);
 				break;
 			case 3:
 				if (miBiblio == null) {
@@ -79,7 +67,7 @@ public class EjercicioBiblioteca {
 					break;
 				}
 				String codigo = pedirISBN(miBiblio);
-				if (miBiblio.existeLibro(codigo))
+				if ((miBiblio.buscarPorISBN(codigo) != null))
 					miBiblio.prestarLibro(codigo);
 				break;
 			case 4:
@@ -88,7 +76,7 @@ public class EjercicioBiblioteca {
 					break;
 				}
 				String codigoDev = pedirISBN(miBiblio);
-				if (miBiblio.existeLibro(codigoDev))
+				if ((miBiblio.buscarPorISBN(codigoDev) != null))
 					miBiblio.devolverLibro(codigoDev);
 				break;
 			case 5:
@@ -120,5 +108,21 @@ public class EjercicioBiblioteca {
 				break;
 			}
 		} while (opcion != 8);
+	}
+
+	private static void registrarLibro(Biblioteca biblio) {
+		String isbn, titulo, autor;
+		do {
+			System.out.println("Introduce ISBN:");
+			isbn = teclado.nextLine();
+			if ((biblio.buscarPorISBN(isbn) != null))
+				System.out.println("ISBN duplicado.");
+		} while ((biblio.buscarPorISBN(isbn) != null));
+		System.out.println("Introduce título:");
+		titulo = teclado.nextLine();
+		System.out.println("Introduce autor:");
+		autor = teclado.nextLine();
+		if (biblio.agregarLibro(isbn, titulo, autor))
+			System.out.println("Libro agregado correctamente.");
 	}
 }

@@ -46,22 +46,18 @@ public class Biblioteca implements Serializable {
 	}
 
 	public void prestarLibro(String isbn) {
-		Libro l = buscarPorISBN(isbn);
+		Prestable l = buscarPorISBN(isbn);
 		if (l != null)
 			l.prestar();
 	}
 
 	public void devolverLibro(String isbn) {
-		Libro l = buscarPorISBN(isbn);
+		Prestable l = buscarPorISBN(isbn);
 		if (l != null)
 			l.devolver();
 	}
 
-	public boolean existeLibro(String isbn) {
-		return (buscarPorISBN(isbn) != null);
-	}
-
-	private Libro buscarPorISBN(String isbn) {
+	public Prestable buscarPorISBN(String isbn) {
 		for (int i = 0; i < this.numLibros; i++) {
 			if (catalogo[i].getIsbn().equals(isbn))
 				return catalogo[i];
