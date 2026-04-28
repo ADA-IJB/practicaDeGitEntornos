@@ -1,4 +1,4 @@
-package com.bibliotech;
+package modelo;
 
 import java.io.*;
 
@@ -62,7 +62,7 @@ public class Biblioteca implements Serializable {
 
 	private Libro buscarPorISBN(String isbn) {
 		for (int i = 0; i < this.NumLibros; i++) {
-			if (catalogo[i].isbn.equals(isbn))
+			if (catalogo[i].getIsbn().equals(isbn))
 				return catalogo[i];
 		}
 		return null;

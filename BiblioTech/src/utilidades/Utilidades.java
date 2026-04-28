@@ -1,4 +1,4 @@
-package com.bibliotech;
+package utilidades;
 import java.util.Scanner;
 
 /**
